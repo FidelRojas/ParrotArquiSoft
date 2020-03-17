@@ -25,7 +25,10 @@ public class Parrot {
 
                 return velocityAfrican.calculateVelocity(this);
             case NORWEGIAN_BLUE:
-                return (isNailed) ? 0 : getBaseSpeed(voltage);
+            	VelocityNorwegianBlue velocityNorwegianBlue= new VelocityNorwegianBlue();
+
+                return velocityNorwegianBlue.calculateVelocity(this);
+                
         }
         throw new RuntimeException("Should be unreachable");
     }
