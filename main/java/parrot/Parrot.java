@@ -16,22 +16,27 @@ public class Parrot {
     }
 
     public double getSpeed() {
-        switch(type) {
-            case EUROPEAN:
-            	VelocityEuropean velocityEuropian= new VelocityEuropean();
-            	return velocityEuropian.calculateVelocity(this);
-            case AFRICAN:
-            	VelocityAfrican velocityAfrican= new VelocityAfrican();
-
-                return velocityAfrican.calculateVelocity(this);
-            case NORWEGIAN_BLUE:
-            	VelocityNorwegianBlue velocityNorwegianBlue= new VelocityNorwegianBlue();
-
-                return velocityNorwegianBlue.calculateVelocity(this);
-                
-        }
-        throw new RuntimeException("Should be unreachable");
+    	VelocityCalculator v = createVelocityCalculator();
+        
+        return v.calculateVelocity(this);
     }
+    private VelocityCalculator createVelocityCalculator() {
+    	VelocityCalculator v =null;
+    	switch(type) {
+        case EUROPEAN:
+        	v= new VelocityEuropean();
+        	return v;
+        case AFRICAN:
+        	v= new VelocityAfrican();
+        	return v;
+        case NORWEGIAN_BLUE:
+        	v= new VelocityNorwegianBlue();
+        	return v;
+    	}
+    	throw new RuntimeException("Should be unreachable");
+    	
+    	
+    }; 
 
     public double getBaseSpeed(double voltage) {
         return Math.min(24.0, voltage*getBaseSpeed());
